@@ -1,59 +1,76 @@
-# Desafio Técnico - Desenvolvedor Back-End Júnior
+<h1 style='text-align:center'>Projeto Escola</h1>
 
-Bem-vindo ao desafio técnico para a vaga de **Desenvolvedor Back-End Júnior**!
+![Django Rest](https://img.shields.io/badge/django%20rest-ff1709?style=for-the-badge&logo=django&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
-Este repositório contém as instruções para o desenvolvimento de um **Sistema de Matrículas para Cursos**, com o objetivo de avaliar seus conhecimentos em desenvolvimento de APIs utilizando Django, Docker e boas práticas de modelagem.
+## Sobre o projeto
+Este repositório contém o código-fonte para um **Sistema de Matrículas para Cursos.**
 
----
+## Endpoints criados
 
-## 🎯 Objetivo
+### Courses
+- **/courses/:** Retorna todos os cursos
+![get-courses](./images-docs/get-courses.png)
 
-Criar uma API RESTful capaz de:
+- **/courses/new:** Adiciona mais um curso ao banco de dados
+![new-course](./images-docs/new-course.png)
 
-1. **Cadastrar cursos**
-2. **Cadastrar alunos**
-3. **Matricular alunos em cursos**
+- **/courses/int:course_id/students/:** Retorna os dados dos estudantes matriculados em um curso
 
----
+### Students
+- **/students/:** Retorna os dados dos alunos
+![get-students](./images-docs/get-students.png)
+- **/students/uuid:student_id/:** Retorna os dados de um usuário especifíco 
+![detail-student](./images-docs/detail-student.png)
+- **/students/register:** Registro um novo estudante
+![register-student](./images-docs/register-student.png)
 
-## 🛠️ Requisitos Técnicos
+### Enrollments
+- **/enrollments/**: Retorna todas as matriculas
+- **/enrollments/do-enrollment:** Realiza a matricula de um aluno em um curso
+![do-enrollment](./images-docs/do-enrollment.png)
 
-Para este desafio, é obrigatório:
+### Documentação
+- **/swagger:** Gera a interface da documentação do Swagger
+- **/redoc:** Gera a documentação mais leve
 
-- Utilizar **Django** e **Django REST Framework**
-- Criar o modelo de banco de dados relacional
-- Utilizar **Generic Views** do DRF
-- Utilizar **ModelSerializer** para serialização
-- Utilizar **Docker** e **Docker Compose** para facilitar a execução da aplicação
-- Usar **PostgreSQL** como banco de dados, rodando via Docker Compose
-- Documentar os endpoints utilizando **Swagger** ou no próprio **README**
+## Generics
+Apesar das rotas estarem definidas, há a possibilidade de testes diretos com o Generics através dos endpoints:
 
----
+- **/courses/test_generics/:** GET e POST para adicionar um novo curso
+- **/students/test_generics/:** GET e POST para adicionar um novo estudante
+- **/enrollments/test_generics:** GET e POST para fazer uma matricula
 
-## ✅ Critérios de Avaliação
 
-- Organização do código e estrutura do projeto
-- Clareza na modelagem do banco de dados
-- Boas práticas com Django e DRF
-- Uso correto de Docker e Docker Compose
-- Documentação da API (README ou Swagger)
-- Funcionamento completo da aplicação
-- Adoção de boas práticas de **Clean Code**
-- Organização geral do projeto (estrutura de diretórios, modularização, etc.)
-- Uso de **commits semânticos** (Conventional Commits)
-- README bem estruturado e informativo
+## Banco de dados
+O banco de dados utilizado é o PostgreSQL. Iniciado com um imagem docker e suas configurações HardCoded. (Redução de complexidade), portanto, para ter acesso ao banco de dados com algum editor, utilize as credenciais inicializadas no docker-compose.
 
----
+### Diagrama
+![Diagrama do Banco de dados](./images-docs/School_diagram.png)
 
-## 🚀 Entrega
 
-- Faça um **fork deste repositório** no GitHub.
-- Crie uma **branch com o seu nome** para trabalhar no desafio.
-- Ao finalizar, envie um **Pull Request** para este repositório com a sua solução.
-- Certifique-se de que o projeto pode ser executado com os comandos padrão (`docker-compose up`).
-- Incluir no README instruções claras de como rodar o projeto e como testar os endpoints.
 
----
 
-Boa sorte! 💻
+## Como rodar
+Vamos rodar a aplicação a partir do Docker-compose, portanto, certifique-se de o ter instalado.
 
+As demais configurações como Variáveis para conexão do banco de dados e Variaveis para execução de imagens estão como hardcoded (Definidas no docker-compose) excluindo a necessidade de criar um arquivo .env e configurá-lo.
+
+Faça um clone desse repositório através do comando:
+
+```bash
+git clone [URL_REPO]
+```
+
+E execute o comando:
+
+```bash
+docker-compose up -d
+```
+
+No navegador ou postman, faça requisições para o dominio:
+```
+http://localhost:8000/[URLS DEFINIDAS]
+```
